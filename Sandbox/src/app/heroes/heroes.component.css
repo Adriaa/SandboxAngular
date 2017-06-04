@@ -3,6 +3,14 @@
   color: white;
 }
 
+button.delete {
+  float: right;
+  margin-top: 2px;
+  margin-right: .8em;
+  background-color: gray !important;
+  color: white;
+}
+
 .heroes {
   margin: 0 0 2em 0;
   list-style-type: none;
