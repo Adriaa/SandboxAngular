@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { BugsComponent } from './bugs/bugs.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  title = 'Kanban Leading App';
 }
