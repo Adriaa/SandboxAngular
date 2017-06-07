@@ -1,4 +1,4 @@
-.redClass {
+/*.redClass {
   background-color: red;
 }
 
@@ -159,4 +159,9 @@ footer {
   .tab-content {
     height: 350px
   }
+}
+*/
+
+body {
+  padding-top: 5rem;
 }
