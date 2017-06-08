@@ -5,27 +5,23 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
-//import { BugComponent } from './bug/bug.component';
-//import { DashboardComponent } from './dashboard/dashboard.component';
-//import { BugsComponent } from './bugs/bugs.component';
-
-//import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { BugComponent } from './bug/bug.component';
+import { BugsComponent } from './bugs/bugs.component';
+import { BugService } from './bug.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
-    //BugComponent,
-    //DashboardComponent,
-    //BugsComponent
+    BugComponent,
+    BugsComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    //NgbModule.forRoot()
+    HttpModule
   ],
-  providers: [],
+  providers: [BugService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

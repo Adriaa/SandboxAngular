@@ -1,0 +1,8 @@
+<div *ngIf="bug">
+  <h2>{{bug.name}} details!</h2>
+  <div><label>id: </label>{{bug.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="bug.name" placeholder="name" />
+  </div>
+</div>
