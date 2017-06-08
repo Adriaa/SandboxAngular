@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { BugsComponent } from './bugs/bugs.component';
+////import { DashboardComponent } from './dashboard/dashboard.component';
+//import { BugsComponent } from './bugs/bugs.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
