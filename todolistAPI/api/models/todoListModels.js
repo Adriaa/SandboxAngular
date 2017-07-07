@@ -7,6 +7,13 @@ var BugSchema = new Schema({
     name: {
         type: String,
         Required: 'Kindly enter the name of the bug'
+    },
+    status: {
+        type: [{
+            type: String,
+            enum: ['new', 'in_analysis', 'in_qualification', 'closed']
+        }],
+        default: ['new']
     }
 });
 /*,
