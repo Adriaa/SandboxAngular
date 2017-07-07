@@ -10,12 +10,11 @@ import { BugService } from "../bug.service";
 export class BugsComponent implements OnInit {
   bugs: Bug[];
   constructor(private bugService: BugService) {
-    this.bugs = [{ id: 1, name: "toto" }];
+    //this.bugs = [{ id: 1, name: "toto" }];
   }
 
   ngOnInit() {
     this.getBugs();
-    //console.log("mon bug 1 est : " + this.bugs[0].name);
   }
 
   getBugs(): void {
@@ -24,16 +23,23 @@ export class BugsComponent implements OnInit {
     this.bugService.getBugs().then(myBugs => this.bugs = myBugs);
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.heroService.create(name)
-  //     .then(hero => {
-  //       this.heroes.push(hero);
+  addBug(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.bugService.createBug(name);
+  }
+
+  deleteBug(bug: Bug): void {
+    console.log(bug);
+    this.bugService.deleteBug(bug._id);
+  }
+
+}
+
   //       this.selectedHero = null;
   //     });
   // }
 
-}
+
 
 

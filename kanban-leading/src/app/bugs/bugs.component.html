@@ -3,6 +3,11 @@
   <tr *ngFor="let bug of bugs">
     <td>{{bug.id}}</td>
     <td>{{bug.name}}</td>
-    <td>{{bug.author}}</td>
+    <td><button (click)="deleteBug(bug)" class="btn btn-default" type="submit">Delete bug</button></td>
   </tr>
 </table>
+
+<div>
+  <label>Bug name:</label> <input #bugName />
+</div>
+<button (click)="addBug(bugName.value)" class="btn btn-default" type="submit">Add bug</button>

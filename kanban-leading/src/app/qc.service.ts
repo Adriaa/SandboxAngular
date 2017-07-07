@@ -4,15 +4,29 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
-export class BugService {
-    private bugURL = 'http://localhost:3000/bugs/';  // URL to web api
+export class QCService {
+    private bugURL = 'http://localhost:8080/bugs/';  // URL to web api
     private headers = new Headers({ 'Content-Type': 'application/json' });
-    private headers_delete = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    //json' });
+
+    ///qcbin/api/domains/{domain}/projects/{project}/defects
+    ///qcbin/api/domains/{domain}/projects/{project}/defects/{ID}
+    //http://alm-help.saas.hp.com/en/12.50/api_refs/REST/webframe.htm#attachments.htm
 
     constructor(private http: Http) {
-        this.printBugs();
+        this.authenticate();
     }
+
+    authenticate(): void {
+        console.log("authentication");
+        let authentUrl = 'http://alm-help.saas.hp.com/en/12.50/api_refs/REST/webframe.htm#attachments.htm';///qcbin/api/authentication/sign-in HTTP/1.1';
+        let authInfos = 'Basic ' + btoa('mmft9450:0223aXa21!');
+        let headerAuth = new Headers({ 'Authorization': authInfos });
+
+        this.http.post(authentUrl, "", { headers: headerAuth })
+            .toPromise()
+            .then(() => console.log("authInfos"));
+
+    }//this.heroesUrl, JSON.stringify({ name: name }), { headers: this.headers })
 
     printBugs(): void {
         this.http.get(this.bugURL)
@@ -33,26 +47,6 @@ export class BugService {
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Bug)
-            .catch(this.handleError);
-    }
-
-    createBug(_name: string): void {
-        console.log("sending post request");
-        console.log(JSON.stringify({ name: _name }));
-        this.http
-            .post(this.bugURL, JSON.stringify({ name: _name }), { headers: this.headers })
-            .toPromise()
-            .catch(this.handleError);
-        /*.toPromise()
-        .then(res => res.json().data as Bug)
-        .catch(this.handleError);*/
-    }
-
-    deleteBug(id: number): void {
-        const url = `${this.bugURL}${id}`;
-        this.http.delete(url, { headers: this.headers_delete })
-            .toPromise()
-            .then(() => null)
             .catch(this.handleError);
     }
 
