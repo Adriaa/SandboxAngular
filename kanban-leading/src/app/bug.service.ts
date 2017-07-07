@@ -22,6 +22,7 @@ export class BugService {
     }
 
     getBugs(): Promise<Bug[]> {
+        console.log("getting bug from api");
         return this.http.get(this.bugURL + "/")
             .toPromise()
             .then(response => response.json() as Bug[])
@@ -36,25 +37,22 @@ export class BugService {
             .catch(this.handleError);
     }
 
-    createBug(_name: string): void {
+    createBug(_name: string): Promise<Bug> {
         console.log("sending post request");
         console.log(JSON.stringify({ name: _name }));
-        this.http
+        return this.http
             .post(this.bugURL + "/", JSON.stringify({ name: _name }), { headers: this.headers })
             .toPromise()
+            .then(res => res.json() as Bug)
             .catch(this.handleError);
-        /*.toPromise()
-        .then(res => res.json().data as Bug)
-        .catch(this.handleError);*/
     }
 
-    deleteBug(id: number): void {
+    deleteBug(id: number): Promise<void> {
         const url = `${this.bugURL}${id}`;
-        this.http.delete(url, { headers: this.headers_delete })
+        return this.http.delete(url, { headers: this.headers_delete })
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
-        console.log("bug deleted");
     }
 
 

@@ -1,13 +1,31 @@
 <span class="label label-primary"> My Bugs </span>
 <table class="table table-hover">
   <tr *ngFor="let bug of bugs">
-    <td>{{bug.id}}</td>
     <td>{{bug.name}}</td>
-    <td><button (click)="deleteBug(bug)" class="btn btn-default" type="submit">Delete bug</button></td>
+    <td [ngStyle]="{'background-color':getColor(bug.status)}">{{bug.status}}</td>
+    <td>
+      <button (click)="deleteBug(bug)" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-remove" aria-hidden="true">delete</span></button></td>
   </tr>
 </table>
 
 <div>
   <label>Bug name:</label> <input #bugName />
 </div>
-<button (click)="addBug(bugName.value)" class="btn btn-default" type="submit">Add bug</button>
+<button (click)="addBug(bugName.value) " class="btn btn-default " type="submit ">Add bug</button>
+
+<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+    aria-expanded="true">
+    Dropdown
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li role="separator" class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  </ul>
+</div>

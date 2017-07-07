@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input } from '@angular/core';
 import { Bug } from "../bug/bug";
 import { BugService } from "../bug.service";
 
@@ -9,17 +9,19 @@ import { BugService } from "../bug.service";
 })
 export class BugsComponent implements OnInit, OnChanges {
   bugs: Bug[];
+  @Input() ListChanges: boolean;
   constructor(private bugService: BugService) {
-    //this.bugs = [{ id: 1, name: "toto" }];
+
   }
 
   ngOnInit() {
     this.getBugs();
+    this.ListChanges = false;
+    console.log("on init : " + this.ListChanges);
   }
 
   ngOnChanges() {
     console.log("Bugscomponentchanging");
-    this.getBugs();
   }
 
   getBugs(): void {
@@ -31,17 +33,24 @@ export class BugsComponent implements OnInit, OnChanges {
   addBug(name: string): void {
     name = name.trim();
     if (!name) { return; }
-    this.bugService.createBug(name);
-    this.getBugs();
+    this.bugService.createBug(name).then(bug => { this.bugs.push(bug) });
   }
 
   deleteBug(bug: Bug): void {
-    console.log(bug);
-    this.bugService.deleteBug(bug._id);
-    this.bugService.getBugs().then(myBugs => this.bugs = myBugs);
+    this.bugService.deleteBug(bug._id).then(() => this.bugs = this.bugs.filter(b => b !== bug));
   }
 
+  getColor(status: string): string {
+    if (status == 'new')
+      return "green";
+    else if (status == "en cours d'analyse")
+      return "yellow";
+    else
+      return "";
+  }
 }
+
+
 
   //       this.selectedHero = null;
   //     });
