@@ -5,7 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BugService {
-    private bugURL = 'http://localhost:3000/bugs/';  // URL to web api
+    private bugURL = 'http://localhost:3000/bugs';  // URL to web api    
     private headers = new Headers({ 'Content-Type': 'application/json' });
     private headers_delete = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded' });
     //json' });
@@ -22,14 +22,14 @@ export class BugService {
     }
 
     getBugs(): Promise<Bug[]> {
-        return this.http.get(this.bugURL)
+        return this.http.get(this.bugURL + "/")
             .toPromise()
             .then(response => response.json() as Bug[])
             .catch(this.handleError);
     }
 
     getBug(id: number): Promise<Bug> {
-        const url = `${this.bugURL}/${id}`;
+        const url = `${this.bugURL}:${id}`;
         return this.http.get(url)
             .toPromise()
             .then(response => response.json().data as Bug)
@@ -40,7 +40,7 @@ export class BugService {
         console.log("sending post request");
         console.log(JSON.stringify({ name: _name }));
         this.http
-            .post(this.bugURL, JSON.stringify({ name: _name }), { headers: this.headers })
+            .post(this.bugURL + "/", JSON.stringify({ name: _name }), { headers: this.headers })
             .toPromise()
             .catch(this.handleError);
         /*.toPromise()
@@ -54,6 +54,7 @@ export class BugService {
             .toPromise()
             .then(() => null)
             .catch(this.handleError);
+        console.log("bug deleted");
     }
 
 
