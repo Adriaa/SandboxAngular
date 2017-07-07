@@ -9,7 +9,7 @@ module.exports = function (app) {
         .post(todoList.create_a_bug);
 
 
-    app.route('/bugss/:bugId')
+    app.route('/bugs:bugId')
         .get(todoList.read_a_bug)
         .put(todoList.update_a_bug)
         .delete(todoList.delete_a_bug);

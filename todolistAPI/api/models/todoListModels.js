@@ -7,7 +7,9 @@ var BugSchema = new Schema({
     name: {
         type: String,
         Required: 'Kindly enter the name of the bug'
-    },
+    }
+});
+/*,
     Created_date: {
         type: Date,
         default: Date.now
@@ -19,6 +21,7 @@ var BugSchema = new Schema({
         }],
         default: ['new']
     }
-});
+}
+);*/
 
-module.exports = mongoose.model('Bugs', BugSchema);
+module.exports = mongoose.model('MyBugs', BugSchema);

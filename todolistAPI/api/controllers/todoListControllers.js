@@ -1,28 +1,34 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Bug = mongoose.model('Bugs');
+    Bug = mongoose.model('MyBugs');
 
 exports.list_all_bugs = function (req, res) {
-    bug.find({}, function (err, bug) {
+    //res.append('Access-Control-Allow-Origin', '*');
+    //res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+    //header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
+    Bug.find({}, function (err, bug) {
         if (err)
             res.send(err);
-        res.json(bug);
+        var a = res.json(bug);
+        console.log(a);
     });
+
 };
 
 exports.create_a_bug = function (req, res) {
-    var new_bug = new bug(req.body);
-    new_bug.save(function (err, bug) {
+    var new_bug = new Bug(req.body);
+    console.log(new_bug);
+    new_bug.save(function (err) {
         if (err)
             res.send(err);
-        res.json(bug);
+        res.json(new_bug);
     });
 };
 
 
 exports.read_a_bug = function (req, res) {
-    bug.findById(req.params.bugId, function (err, bug) {
+    Bug.findById(req.params.bugId, function (err, bug) {
         if (err)
             res.send(err);
         res.json(bug);
@@ -31,7 +37,7 @@ exports.read_a_bug = function (req, res) {
 
 
 exports.update_a_bug = function (req, res) {
-    bug.findOneAndUpdate({
+    Bug.findOneAndUpdate({
         _id: req.params.bugId
     }, req.body, {
         new: true
@@ -44,15 +50,18 @@ exports.update_a_bug = function (req, res) {
 
 
 exports.delete_a_bug = function (req, res) {
+    console.log(req.body);
 
-
-    bug.remove({
+    Bug.remove({
         _id: req.params.bugId
     }, function (err, bug) {
-        if (err)
+        if (err) {
+            console.log("there has been an issue while deleting the bug");
             res.send(err);
-        res.json({
-            message: 'bug successfully deleted'
-        });
+        } else {
+            res.json({
+                message: 'bug successfully deleted'
+            });
+        }
     });
 };
