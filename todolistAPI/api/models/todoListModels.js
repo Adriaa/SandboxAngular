@@ -14,6 +14,13 @@ var BugSchema = new Schema({
             enum: ['new', 'in_analysis', 'in_qualification', 'closed']
         }],
         default: ['new']
+    },
+    source: {
+        type: [{
+            type: String,
+            enum: ['AM', 'E1', 'CONCEPTION', 'PROD', 'PREPROD']
+        }],
+        default: ['AM']
     }
 });
 /*,
