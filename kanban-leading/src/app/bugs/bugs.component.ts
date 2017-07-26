@@ -9,31 +9,49 @@ import { BugService } from "../bug.service";
 })
 export class BugsComponent implements OnInit {
   bugs: Bug[];
+
   constructor(private bugService: BugService) {
-    this.bugs = [{ id: 1, name: "toto" }];
+    this.getBugs();
   }
 
   ngOnInit() {
     this.getBugs();
-    //console.log("mon bug 1 est : " + this.bugs[0].name);
   }
 
   getBugs(): void {
     console.log("getBugs starts");
-    this.bugService.printBugs();
-    this.bugService.getBugs().then(myBugs => this.bugs = myBugs);
+    this.bugService.getBugs().then(bugs => this.bugs = bugs);
+
   }
 
-  // add(name: string): void {
-  //   name = name.trim();
-  //   if (!name) { return; }
-  //   this.heroService.create(name)
-  //     .then(hero => {
-  //       this.heroes.push(hero);
+  addBug(name: string, source: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.bugService.createBug(name, source).then(bug => this.bugs.push(bug));
+
+  }
+
+  deleteBug(bug: Bug): void {
+    this.bugService.deleteBug(bug).then(() => this.bugs = this.bugs.filter(b => b != bug));
+
+  }
+
+  getColor(status: string): string {
+    if (status == 'new')
+      return "table-success";
+    else if (status == "en cours d'analyse")
+      return "table-warning";
+    else
+      return "";
+  }
+}
+
+
+
   //       this.selectedHero = null;
   //     });
   // }
 
-}
+
 
 

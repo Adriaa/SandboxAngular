@@ -8,6 +8,22 @@ var BugSchema = new Schema({
         type: String,
         Required: 'Kindly enter the name of the bug'
     },
+    status: {
+        type: [{
+            type: String,
+            enum: ['new', 'in_analysis', 'in_qualification', 'closed']
+        }],
+        default: ['new']
+    },
+    source: {
+        type: [{
+            type: String,
+            enum: ['AM', 'E1', 'CONCEPTION', 'PROD', 'PREPROD']
+        }],
+        default: ['AM']
+    }
+});
+/*,
     Created_date: {
         type: Date,
         default: Date.now
@@ -19,6 +35,7 @@ var BugSchema = new Schema({
         }],
         default: ['new']
     }
-});
+}
+);*/
 
-module.exports = mongoose.model('Bugs', BugSchema);
+module.exports = mongoose.model('MyBugs', BugSchema);

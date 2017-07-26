@@ -1,8 +1,34 @@
-<span class="label label-primary"> My Bugs </span>
+<br>
 <table class="table table-hover">
   <tr *ngFor="let bug of bugs">
-    <td>{{bug.id}}</td>
     <td>{{bug.name}}</td>
-    <td>{{bug.author}}</td>
+    <td>{{bug.source}}</td>
+    <td [ngClass]='getColor(bug.status)'>{{bug.status}}</td>
+    <td>
+      <button (click)="deleteBug(bug)" class="fa fa-trash-o fa-lg" type="submit"></button></td>
   </tr>
 </table>
+
+<div>
+  <label>Bug name:</label> <input #bugName />
+
+  <select class="selectpicker" [(ngModel)]="bugSource">
+  <option value="PROD">Production</option>
+  <option value="PREPROD">Preprod</option>
+  <option value="AM">AM</option>
+  <option value="E1">E1</option>
+  <option value="CONCEPTION">Conception</option>
+</select>
+
+  <button (click)="addBug(bugName.value,bugSource) " class="fa fa-plus-circle" type="submit" aria-hidden="true"></button>
+</div>
+
+
+<!--<span class="fa fa-refresh fa-spin fa-3x fa-fw"></span>-->
+<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+  <li><a href="#">PROD</a></li>
+  <li><a href="#">PREPROD</a></li>
+  <li><a href="#">AM</a></li>
+  <li><a href="#">E1</a></li>
+  <li><a href="#">CONCEPTION</a></li>
+</ul>

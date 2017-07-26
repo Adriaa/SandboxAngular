@@ -1,6 +1,6 @@
 export class Bug {
-    id: number;
+    _id: number;
     name: string;
-    author: string;
-    date: Date;
+    status: string;
+    source: string;
 }
